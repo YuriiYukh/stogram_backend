@@ -5,3 +5,5 @@
 - Initiated django project and application.
 - Add readme, changelog, requirements files.
 - Add pylint settings.
+- Add database models.
+- Add DRF serializers
