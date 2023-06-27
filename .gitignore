@@ -1,3 +1,6 @@
 db.sqlite3
 stogram_backend/__pycache__/*
 .env
+stogram_app/__pycache__/*
+images/*
+stogram_app/migrations/*
