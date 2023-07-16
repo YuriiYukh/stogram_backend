@@ -1,5 +1,9 @@
 # Stogram backend
 
+## 0.0.2
+
+- Add views.
+
 ## 0.0.1
 
 - Initiated django project and application.
