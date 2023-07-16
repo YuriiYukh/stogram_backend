@@ -1,8 +1,13 @@
 # Stogram backend
 
+## 0.1.0
+
+- Add auth endpoint.
+- Add register endpoint.
+
 ## 0.0.2
 
-- Add views.
+- Add views for all models.
 
 ## 0.0.1
 

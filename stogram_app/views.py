@@ -1,8 +1,15 @@
-from rest_framework import generics, permissions, status, mixins
+from rest_framework import generics, permissions, mixins
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from .models import Poster, Post, Vote
-from .serializers import PosterSerializer, PostSerializer, VoteSerializer
+from django.contrib.auth.models import User
+from .serializers import UserSerializer, PosterSerializer, PostSerializer, VoteSerializer
+
+
+class Register(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class UserInfo(mixins.CreateModelMixin, generics.RetrieveUpdateDestroyAPIView):
