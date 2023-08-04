@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:15
+    container_name: stogram_postgres
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    env_file:
+      - .env
+  stogram:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: stogram_backend:latest
+    container_name: stogram_backend
+    depends_on:
+      - db
+    volumes:
+      - static_volume:/stgr/static
+      - media_volume:/stgr/media
+      - images_volume:/stgr/images
+    expose:
+      - 8000
+    env_file:
+      - .env
+    command:
+      - bash
+      - -c
+      - |
+        python3 manage.py collectstatic --noinput
+        python3 manage.py migrate --noinput
+        python3 manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL 
+        gunicorn -b 0.0.0.0:8000 stogram_backend.wsgi:application
+  nginx:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./docker/nginx
+    container_name: stogram_nginx
+    image: stogram_nginx
+    volumes:
+      - static_volume:/stgr/static
+      - media_volume:/stgr/media
+    depends_on:
+      - stogram
+    ports:
+      - "8070:80"
+
+volumes:
+  static_volume:
+  media_volume:
+  db_volume:
+  images_volume:
