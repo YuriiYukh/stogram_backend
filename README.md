@@ -6,9 +6,10 @@ To test this api you need to pull repository on your linux machine(Ubuntu via WS
 
 There is already .env file with database passwords and user passwords. Because it is not deployed yet :)
 
-After that you need to cd to the project directory on linux and use the following command:
+After that you need to cd to the project directory on linux and use the following commands:
 
 ```
+docker compose build
 docker compose up
 ```
 
